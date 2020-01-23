@@ -1,0 +1,20 @@
+<component name="ArtifactManager">
+  <artifact type="exploded-war" name="Lab3Faces:war exploded">
+    <output-path>$PROJECT_DIR$/out/artifacts/Lab3Faces_war_exploded</output-path>
+    <root id="root">
+      <element id="javaee-facet-resources" facet="Lab3Faces/web/Web" />
+      <element id="directory" name="WEB-INF">
+        <element id="directory" name="classes">
+          <element id="module-output" name="Lab3Faces" />
+        </element>
+        <element id="directory" name="lib">
+          <element id="library" level="project" name="javax.persistence" />
+          <element id="library" level="project" name="javax.faces-2.4.0" />
+          <element id="library" level="project" name="primefaces-6.1" />
+          <element id="library" level="project" name="postgresql-42.2.9" />
+          <element id="library" level="project" name="org.hibernate:hibernate-core:5.4.9.Final" />
+        </element>
+      </element>
+    </root>
+  </artifact>
+</component>

@@ -1,0 +1,174 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE html
+        PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN"
+        "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+<h:outputStylesheet library = "css" name = "design.css" />
+<h:outputScript library="js" name="service.js"/>
+<h:outputScript library="js" name="graph.js"/>
+
+<h:head>
+    <title>Birds are singing, flowers are blooming...</title>
+</h:head>
+
+<h:body onload="init()">
+    <div id="tophat">
+        ОЛЕГ ОСИПОВ, P3214 <br/>
+        <span>Вариант 568275</span>
+    </div>
+
+
+    <h:form id="profile" styleClass="mainservice">
+        Hello, #{pointcheck.username}! Hope you have a nice day!
+        <h:commandButton styleClass="button logout-button"
+                         style="float: right"
+                         action="LeaveService"
+                         value="Leave, for now"/>
+    </h:form>
+
+    <div id="main" class="mainservice">
+        <div class="formholder">
+            <h:form id="pointsend">
+                Choose an X value! <br/>
+
+                <h:inputHidden id="form_value_x_container"
+                               value="#{pointcheck.x}"
+                               required="true"/>
+                <p:slider id="form_value_x_input"
+                          for="form_value_x_container"
+                          display="form_value_x_display"
+                          displayTemplate="You've picked {value}, nice choice!"
+                          minValue="-4" maxValue="4" step="1"
+                          onSlideEnd="onXChange()"/>
+                <h:outputText id="form_value_x_display"
+                              styleClass="errormessage" />
+
+                <br/><br/>
+
+                Enter the Y: <br/>
+
+                <h:inputText id="form_value_y_input" required="true"
+                             value="#{pointcheck.y}"
+                             placeholder="-3 to 3, please!"
+                             validatorMessage="From -3 to 3, darling!"
+                             converterMessage="No, enter a number! Come on, you can do it!"
+                             requiredMessage="Please do this, it's important!"
+                             maxlength="15"
+                             onchange="onYChange()">
+                    <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
+                    <f:ajax event="keyup" render="form_value_y_display submit"/>
+                </h:inputText><br/>
+                <h:message for="form_value_y_input" styleClass="errormessage" id="form_value_y_display"/>
+
+                <br/><br/>
+
+                And now, pick any R you like!<br/>
+
+                <h:inputHidden id="form_value_r_container"
+                               value="#{pointcheck.r}"
+                               required="true"/>
+                <p:slider id="form_value_r_input"
+                          for="form_value_r_container"
+                          display="form_value_r_display"
+                          displayTemplate="{value}? That's a good R!"
+                          minValue="2" maxValue="5" step="0.25"
+                          onSlideEnd="onRChange()"/>
+                <h:outputText id="form_value_r_display"
+                              styleClass="errormessage"/>
+
+                <br/><br/>
+                <p:remoteCommand name="testPointForm"
+                                 action="#{pointcheck.testPointForm}"
+                                 update="graphPoints resultTable"
+                                 oncomplete="drawPoint(xForm, yForm, pointInside);  showResults();
+                                    drawPermanentPoint(xGraph, yGraph)"/>
+            </h:form>
+
+            <button id="form_button_submit" class="button" onclick="testPointForm()">I'm ready!</button>
+        </div>
+
+        <div class="graphics">
+            <h:form id="graphform">
+                <canvas id="areaCanvas" height="300px" width="300px"/>
+                <canvas id="permanentPointCanvas" height="300px" width="300px"/>
+                <canvas id="axisCanvas" height="300px" width="300px"/>
+                <canvas id="pointCanvas" height="300px" width="300px"
+                        onclick="onGraphClick(event, testPointGraph)"/>
+
+                <h:inputHidden id="xGraph" value="#{pointcheck.xGraph}"/>
+                <h:inputHidden id="yGraph" value="#{pointcheck.yGraph}"/>
+                <h:inputHidden id="rGraph" value="#{pointcheck.r}"/>
+
+                <p:remoteCommand name="testPointGraph"
+                                 action="#{pointcheck.testPointGraph}"
+                                 update="graphPoints resultTable"
+                                 oncomplete="drawPoint(xGraph, yGraph, pointInside); showResults();
+                                     drawPermanentPoint(xGraph, yGraph);"/>
+            </h:form>
+        </div>
+    </div>
+
+    <div id="results" class="#{pointcheck.resultTableClass}">
+
+        <h:form>
+            <p:remoteCommand name="clearPointHistory"
+                             action="#{pointcheck.clearHisrory}"
+                             update="resultTable"
+                             oncomplete="historyClearPageUpdate();"/>
+        </h:form>
+
+        <div>
+            Here are all the cool requests you've made earlier:
+            <button class="button" onclick="clearPointHistory()">Carefully remove them</button>
+        </div>
+
+        <h:dataTable id="resultTable"
+                     value = "#{pointcheck.userPoints}" var = "point"
+                     styleClass = "results"
+                     headerClass = "toprow"
+                     columnClasses= ",,,resultcell,">
+
+            <h:column>
+                <f:facet name = "header">X</f:facet>
+                #{point.x}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Y</f:facet>
+                #{point.y}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">R</f:facet>
+                #{point.r}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Is it in?</f:facet>
+                #{point.result ? "Yesss!" : "no no"}
+            </h:column>
+
+            <h:column>
+                <f:facet name = "header">Checked at</f:facet>
+                #{point.time}
+            </h:column>
+        </h:dataTable>
+    </div>
+
+    <!-- Container for temporary storage of values to put on a graphic-->
+    <h:panelGroup id="graphPoints">
+        <script type="text/javascript">
+            console.log("Updating the point values...");
+            xGraph = '#{pointcheck.xGraph}'; yGraph = '#{pointcheck.yGraph}';
+            xForm = '#{pointcheck.x}'; yForm = '#{pointcheck.y}';
+            pointInside = '#{pointcheck.inside}'==="true" ; //Better not ask questions
+        </script>
+    </h:panelGroup>
+</h:body>
+
+</html>

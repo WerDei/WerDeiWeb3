@@ -1,0 +1,213 @@
+/* ----- Globals ----- */
+
+*::selection{
+    background-color:green;
+    color: greenyellow;
+}
+
+*::-moz-selection{
+    background-color:green;
+    color: greenyellow;
+}
+
+body{
+    background-color:cornsilk;
+    margin: 0%;
+}
+
+
+.button{
+    background-color: cornsilk;
+    border: 1px solid goldenrod;
+    height: 30px;
+}
+
+    .button:hover{
+        background-color: burlywood;
+        border-color:darkgoldenrod;
+    }
+
+    .button:focus{
+        background-color: rgb(247, 235, 186);
+        border-color:darkgoldenrod;
+    }
+
+    .button:active{
+        background-color: rgb(192, 154, 104);
+        border-color:darkgoldenrod;
+    }
+
+    .button:disabled{
+        border-color: gray;
+    }
+
+    .button:disabled:focus{
+        background-color: red;
+    }
+
+#tophat{
+    text-align: center;
+    color: black;
+    padding: 20px 0px 20px 0px;
+    font-family: serif;
+    font-size: 18px;
+    font-weight: bold;
+
+    background-color: orange;
+    border-style: none none solid none;
+    border-width: 3px;
+    border-bottom-color:darkgoldenrod;
+}
+
+#tophat span{
+    font-size: 75%;
+}
+
+
+/* ----- Starting Page Parts ----- */
+
+#clock {
+    margin: 10px;
+    float: right;
+    font-family: monospace;
+    color: darkgoldenrod;
+}
+
+
+/* ----- Main Page Parts ----- */
+
+#profile{
+    margin: 30px auto auto auto;
+    font-size: large;
+    color: darkgoldenrod;
+}
+
+.logout-button{
+    background-color: ivory;
+    border: 1px solid darkgoldenrod;
+}
+
+
+#main > div{
+    width: 300px;
+    padding: 10px;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: goldenrod;
+}
+
+    .mainservice{
+        margin: 20px auto auto auto;
+        width: 700px;
+    }
+
+    .mainlogin {
+        margin: 200px auto auto auto;
+        width: 324px;
+    }
+
+.formholder {
+    height: 300px;
+    float: left;
+    background-color:ivory;
+}
+
+.graphics {
+    height: 300px;
+    float: right;
+    background-color:white;
+}
+
+    .graphics canvas {
+        position: absolute;
+    }
+
+.login {
+    background-color:ivory;
+}
+
+
+#results{
+    margin: 370px auto 50px auto;
+    width: 680px;
+    background-color:ivory;
+    padding: 10px;
+
+    border-style: solid;
+    border-width: 2px;
+    border-color: goldenrod;
+}
+
+    #results > div{
+        height: 40px;
+    }
+
+    #results button{
+        float: right;
+    }
+
+
+/* ----- Form and Everything on it ----- */
+
+
+#loginform-form_button_login{
+    height: 50px;
+    width: 100%;
+    margin: 10px 0 0 0;
+    font-size: large;
+}
+
+.form_textinput_name{
+    margin: 30px 0 0 5px;
+    font-size: medium;
+}
+
+
+/* ----- Messages ----- */
+
+.errormessage{
+    color: brown;
+}
+
+.successmessage{
+    color: #5869af;
+}
+
+
+/* ----- Result Table ----- */
+
+.results {
+    border-collapse: collapse;
+    width: 100%;
+
+}
+
+    .results tr{
+        background-color: white;
+        height: 25px;
+    }
+
+    .results .toprow{
+        background-color: cornsilk;
+    }
+
+    .results th{
+        border: 1px solid goldenrod;
+        text-align: center;
+    }
+
+    .results td{
+        border: 1px solid goldenrod;
+        text-align: center;
+        width: 18%;
+    }
+
+    .results .resultcell{
+        width: 27%;
+    }
+
+.hidden
+{
+    display: none;
+}

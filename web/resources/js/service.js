@@ -81,8 +81,7 @@ function historyClearPageUpdate()
     document.getElementById("results").classList.add("hidden");
 
     clearPoints();
-
-    console.log("All done, all those poor points are now forgotten!")
+    clearPermanentPoints();
 }
 
 function showResults()
@@ -100,7 +99,7 @@ function drawPermanentPointsFromTable()
     var table = document.getElementById("resultTable").getElementsByTagName("tbody")[0];
     for (var i = 0; i < table.children.length; i++) {
         var row = table.children[i];
-        drawPermanentPoint(row.children[0].innerHTML, row.children[1].innerHTML, row.children[3].innerHTML.includes("Yesss!"));
+        putPermanentPoint(row.children[0].innerHTML, row.children[1].innerHTML, row.children[3].innerHTML.includes("Yesss!"));
     }
 }
 
@@ -114,6 +113,6 @@ function drawPointsFromTable(r)
     for (var i = 0; i < table.children.length; i++) {
         var row = table.children[i];
         if (row.children[2].innerHTML*1 == r)
-            drawPoint(row.children[0].innerHTML, row.children[1].innerHTML, row.children[3].innerHTML.includes("Yesss!"));
+            putPoint(row.children[0].innerHTML, row.children[1].innerHTML, row.children[3].innerHTML.includes("Yesss!"));
     }
 }

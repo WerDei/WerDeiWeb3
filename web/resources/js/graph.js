@@ -86,27 +86,25 @@ function drawHitArea(r) {
 }
 
 
-function drawPoint(x, y, inside)
+function putPoint(x, y, inside)
 {
     console.log("Drawing a point - " + x*1 + " " + y*1 + " " + inside);
-    var canvas = document.getElementById("pointCanvas");
-    var context = canvas.getContext('2d');
-
-    context.strokeStyle = context.fillStyle = inside ? "#93FF3C" : "#FF552F";
-
-    context.beginPath();
-    context.arc(canvas.width/2+x*pixelsPerUnit,canvas.height/2-y*pixelsPerUnit,3,0,Math.PI*2, true);
-    context.fill();
+    drawPoint(x, y, inside ? "#93FF3C" : "#FF552F", 1, "pointCanvas");
 }
 
-function drawPermanentPoint(x, y)
+function putPermanentPoint(x, y)
 {
     console.log("Drawing a permanent point - " + x*1 + " " + y*1);
-    var canvas = document.getElementById("permanentPointCanvas");
+    drawPoint(x, y, "#000000", 0.1, "permanentPointCanvas");
+}
+
+function drawPoint(x, y, color, alpha, canvas)
+{
+    var canvas = document.getElementById(canvas);
     var context = canvas.getContext('2d');
 
-    context.strokeStyle = context.fillStyle = "#000000";
-    context.globalAlpha=0.1;
+    context.strokeStyle = context.fillStyle = color;
+    context.globalAlpha=alpha;
 
     context.beginPath();
     context.arc(canvas.width/2+x*pixelsPerUnit,canvas.height/2-y*pixelsPerUnit,3,0,Math.PI*2, true);
@@ -114,9 +112,16 @@ function drawPermanentPoint(x, y)
 }
 
 function clearPoints() {
-    var canvas = document.getElementById("pointCanvas");
+    clearCanvas("pointCanvas");
+}
+
+function clearPermanentPoints() {
+    clearCanvas("permanentPointCanvas");
+}
+
+function clearCanvas(canvas) {
+    var canvas = document.getElementById(canvas);
     var context = canvas.getContext('2d');
 
     context.clearRect(0, 0, canvas.width, canvas.height);
 }
-

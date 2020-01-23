@@ -27,8 +27,9 @@
                 <span> Hi, I am </span>
                 <h:inputText id="name" styleClass="form_textinput_name"
                              value="#{pointcheck.username}"
-                             maxlength="15"
-                             required="true"/> <br/>
+                             maxlength="18"
+                             required="true"
+                             onchange="onNameEnter()"/> <br/>
                 <h:commandButton id="form_button_login"
                                  styleClass="button"
                                  action="EnterService"

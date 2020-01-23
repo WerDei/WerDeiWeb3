@@ -31,6 +31,6 @@ function getSeparator()
 }
 
 function onNameEnter() {
-    var nameEntered = !(document.getElementById("loginform-name").innerHTML === "");
-    document.getElementById("form_button_login").disabled = !nameEntered;
+    var nameEmpty = document.getElementById("loginform-name").innerHTML === "";
+    document.getElementById("form_button_login").disabled = nameEmpty;
 }

@@ -85,8 +85,8 @@
                 <p:remoteCommand name="testPointForm"
                                  action="#{pointcheck.testPointForm}"
                                  update="graphPoints resultTable"
-                                 oncomplete="drawPoint(xForm, yForm, pointInside);  showResults();
-                                    drawPermanentPoint(xGraph, yGraph)"/>
+                                 oncomplete="putPoint(xForm, yForm, pointInside);  showResults();
+                                    putPermanentPoint(xGraph, yGraph)"/>
             </h:form>
 
             <button id="form_button_submit" class="button" onclick="testPointForm()">I'm ready!</button>
@@ -107,8 +107,8 @@
                 <p:remoteCommand name="testPointGraph"
                                  action="#{pointcheck.testPointGraph}"
                                  update="graphPoints resultTable"
-                                 oncomplete="drawPoint(xGraph, yGraph, pointInside); showResults();
-                                     drawPermanentPoint(xGraph, yGraph);"/>
+                                 oncomplete="putPoint(xGraph, yGraph, pointInside); showResults();
+                                     putPermanentPoint(xGraph, yGraph);"/>
             </h:form>
         </div>
     </div>

@@ -16,7 +16,6 @@ function init()
 
     drawGraph();
     isDataValidAndReady();
-    drawPermanentPointsFromTable();
 }
 
 
@@ -38,7 +37,7 @@ function onRChange()
     valueRvalid = true;
     var r = document.getElementById("pointsend-form_value_r_container").value;
     drawHitArea(r);
-    drawPointsFromTable(r);
+    drawPointsFromTable();
     isDataValidAndReady();
 }
 
@@ -81,7 +80,6 @@ function historyClearPageUpdate()
     document.getElementById("results").classList.add("hidden");
 
     clearPoints();
-    clearPermanentPoints();
 }
 
 function showResults()
@@ -89,30 +87,14 @@ function showResults()
     document.getElementById("results").classList.remove("hidden");
 }
 
-
-function drawPermanentPointsFromTable()
+function drawPointsFromTable()
 {
-    console.log("Putting all previous points...");
-
-    clearPoints();
+    console.log("Putting previous points on the graph...");
 
     var table = document.getElementById("resultTable").getElementsByTagName("tbody")[0];
     for (var i = 0; i < table.children.length; i++) {
         var row = table.children[i];
-        putPermanentPoint(row.children[0].innerHTML, row.children[1].innerHTML, row.children[3].innerHTML.includes("Yesss!"));
-    }
-}
-
-function drawPointsFromTable(r)
-{
-    console.log("Putting previous points with R=" + r + " on the graph...");
-
-    clearPoints();
-
-    var table = document.getElementById("resultTable").getElementsByTagName("tbody")[0];
-    for (var i = 0; i < table.children.length; i++) {
-        var row = table.children[i];
-        if (row.children[2].innerHTML*1 == r)
-            putPoint(row.children[0].innerHTML, row.children[1].innerHTML, row.children[3].innerHTML.includes("Yesss!"));
+        if (row.children[2].innerHTML != 0)
+            putPoint(row.children[0].innerHTML, row.children[1].innerHTML, row.children[4].innerHTML.includes("true"));
     }
 }

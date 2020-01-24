@@ -1,6 +1,7 @@
 package net.werdei.web3.beans;
 
 import net.werdei.web3.Point;
+import net.werdei.web3.TablePoint;
 
 import javax.persistence.EntityManager;
 import javax.persistence.Persistence;
@@ -94,26 +95,21 @@ public class ServiceBean
         return points.size() > 0 ? "" : "hidden";
     }
 
-    public List<Point> getUserPoints()
+    public List<TablePoint> getUserPoints()
     {
+        System.out.println("Returning table points");
+        System.out.println(r);
         List<Point> points = DBControl.getPoints(username);
-        /*
-        String out = "";
 
-        for (Point point : points) {
-            String newRow = "<tr class=\"resultrow\">" +
-                    "<th>" + point.getX() + "</th>" +
-                    "<th>" + point.getY() + "</th>" +
-                    "<th>" + point.getR() + "</th>" +
-                    "<th>" + (point.getResult() ? "Yesss!" : "oh no") + "</th>" +
-                    "<th>" + point.getTime() + "</th> </tr>";
-            out += newRow;
-        }
-        */
-        return points;
+        ArrayList<TablePoint> tp = new ArrayList<TablePoint>();
+        points.forEach(point -> tp.add(new TablePoint(point, r)));
+
+        tp.forEach(p -> System.out.println(p.isInsideCurrent() + " / " + p.isInsideNative()));
+
+        return tp;
     }
 
-    public void clearHisrory()
+    public void clearHistory()
     {
         DBControl.removePoints(username);
     }

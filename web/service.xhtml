@@ -77,16 +77,19 @@
                           display="form_value_r_display"
                           displayTemplate="{value}? That's a good R!"
                           minValue="2" maxValue="5" step="0.25"
-                          onSlideEnd="onRChange()"/>
+                          onSlideEnd="setTimeout(onRChange, 250); updateTable();">
+                </p:slider>
                 <h:outputText id="form_value_r_display"
                               styleClass="errormessage"/>
+
+                <p:remoteCommand name="updateTable"
+                                 update="resultTable"/>
 
                 <br/><br/>
                 <p:remoteCommand name="testPointForm"
                                  action="#{pointcheck.testPointForm}"
                                  update="graphPoints resultTable"
-                                 oncomplete="putPoint(xForm, yForm, pointInside);  showResults();
-                                    putPermanentPoint(xGraph, yGraph)"/>
+                                 oncomplete="putPoint(xForm, yForm, pointInside);  showResults();"/>
             </h:form>
 
             <button id="form_button_submit" class="button" onclick="testPointForm()">I'm ready!</button>
@@ -107,8 +110,7 @@
                 <p:remoteCommand name="testPointGraph"
                                  action="#{pointcheck.testPointGraph}"
                                  update="graphPoints resultTable"
-                                 oncomplete="putPoint(xGraph, yGraph, pointInside); showResults();
-                                     putPermanentPoint(xGraph, yGraph);"/>
+                                 oncomplete="putPoint(xGraph, yGraph, pointInside); showResults();"/>
             </h:form>
         </div>
     </div>
@@ -117,7 +119,7 @@
 
         <h:form>
             <p:remoteCommand name="clearPointHistory"
-                             action="#{pointcheck.clearHisrory}"
+                             action="#{pointcheck.clearHistory}"
                              update="resultTable"
                              oncomplete="historyClearPageUpdate();"/>
         </h:form>
@@ -131,7 +133,7 @@
                      value = "#{pointcheck.userPoints}" var = "point"
                      styleClass = "results"
                      headerClass = "toprow"
-                     columnClasses= ",,,resultcell,">
+                     columnClasses= ",,,resultcell,hidden,">
 
             <h:column>
                 <f:facet name = "header">X</f:facet>
@@ -150,7 +152,11 @@
 
             <h:column>
                 <f:facet name = "header">Is it in?</f:facet>
-                #{point.result ? "Yesss!" : "no no"}
+                #{point.insideNative ? "Yesss!" : "no no"}
+            </h:column>
+
+            <h:column headerClass="hidden">
+                #{point.insideCurrent}
             </h:column>
 
             <h:column>

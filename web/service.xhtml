@@ -59,7 +59,7 @@
                              converterMessage="No, enter a number! Come on, you can do it!"
                              requiredMessage="Please do this, it's important!"
                              maxlength="15"
-                             onchange="onYChange()">
+                             onkeyup="onYChange()">
                     <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
                     <f:ajax event="keyup" render="form_value_y_display submit"/>
                 </h:inputText><br/>

@@ -15,6 +15,7 @@ function init()
     valueRvalid = false;
 
     drawGraph();
+    onYChange();
     isDataValidAndReady();
 }
 
@@ -26,7 +27,7 @@ function onXChange() {
 
 function onYChange() {
     var y = document.getElementById("pointsend-form_value_y_display").innerHTML;
-    valueYvalid = y === "";
+    console.log(valueYvalid);
     isDataValidAndReady();
 }
 
@@ -36,6 +37,7 @@ function onRChange()
 
     valueRvalid = true;
     var r = document.getElementById("pointsend-form_value_r_container").value;
+
     drawHitArea(r);
     drawPointsFromTable();
     isDataValidAndReady();

@@ -5,6 +5,7 @@ function init()
     oddUpdate = true;
     window.setInterval(updateClock, 1000);
     updateClock();
+    onNameEnter();
 }
 
 function updateClock()
@@ -31,6 +32,6 @@ function getSeparator()
 }
 
 function onNameEnter() {
-    var nameEmpty = document.getElementById("loginform-name").innerHTML === "";
-    document.getElementById("form_button_login").disabled = nameEmpty;
+    var nameError = document.getElementById("loginform-name").value === "";
+    document.getElementById("loginform-form_button_login").disabled = nameError;
 }

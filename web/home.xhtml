@@ -29,7 +29,11 @@
                              value="#{pointcheck.username}"
                              maxlength="18"
                              required="true"
-                             onchange="onNameEnter()"/> <br/>
+                             onkeyup="onNameEnter()"
+                             requiredMessage="I kinda want to know you...">
+                    <f:ajax event="keyup" render="name_display"/>
+                </h:inputText> <br/>
+                <h:message for="name" styleClass="errormessage" id="name_display"/><br/>
                 <h:commandButton id="form_button_login"
                                  styleClass="button"
                                  action="EnterService"

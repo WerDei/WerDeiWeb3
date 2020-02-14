@@ -10,6 +10,7 @@ import java.util.Locale;
 public class Point {
 
     @Id
+    @GeneratedValue
     @Column(name = "id", nullable = false)
     private int id;
     @Column(name = "x")
@@ -32,7 +33,6 @@ public class Point {
     public Point(double rawX, double rawY, double rawR, int offset, String owner)
     {
         Date date = new Date();
-        this.id = (int) date.getTime();
 
         time = new SimpleDateFormat("HH:mm:ss").format(new Date(date.getTime()-3*1000*60*60-offset*1000*60));
 
@@ -101,13 +101,13 @@ public class Point {
         }
 
         //Quadrant II
-        else if (scaledX < 0 && scaledY >= 0)
+        else if (scaledX < 0 && scaledY > 0)
         {
             result = false;
         }
 
         //Quadrant III
-        else if (scaledX < 0 && scaledY < 0)
+        else if (scaledX <= 0 && scaledY <= 0)
         {
             if (scaledX >= -0.5 && scaledY >= -1)
                 result = true;
@@ -116,7 +116,7 @@ public class Point {
         }
 
         //Quadrant IV
-        else if (scaledX >= 0 && scaledY < 0)
+        else if (scaledX > 0 && scaledY < 0)
         {
             if (Math.pow(scaledX, 2) + Math.pow(scaledY, 2) <= 0.25) //0.5^2 = 0.25
                 result = true;

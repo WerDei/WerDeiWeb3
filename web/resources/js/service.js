@@ -26,8 +26,7 @@ function onXChange() {
 }
 
 function onYChange() {
-    var y = document.getElementById("pointsend-form_value_y_display").innerHTML;
-    console.log(valueYvalid);
+    valueYvalid = document.getElementById("pointsend-form_value_y_display").innerHTML === "";
     isDataValidAndReady();
 }
 

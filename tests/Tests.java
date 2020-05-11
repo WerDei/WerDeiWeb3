@@ -1,36 +1,33 @@
 import net.werdei.web3.Point;
-import org.junit.jupiter.api.Assertions;
-import org.junit.jupiter.api.DisplayName;
-import org.junit.jupiter.api.Test;
+import org.junit.Assert;
+import org.junit.Test;
 
 public class Tests {
 
     @Test
-    @DisplayName("Tests for correct area calculation")
     public void areaTest()
     {
-        Assertions.assertAll(
-                () -> Assertions.assertTrue (getPointResult(0, 0, 3.5), "Center"),
+        Assert.assertTrue ("Center", getPointResult(0, 0, 3.5));
 
-                () -> Assertions.assertTrue (getPointResult(1, 1, 5), "Inside the zone, quadrant I"),
-                () -> Assertions.assertFalse(getPointResult(3, 3, 2), "Outside the zone, quadrant I"),
-                () -> Assertions.assertTrue (getPointResult(1, 1, 3), "On the edge, quadrant I"),
-                () -> Assertions.assertTrue (getPointResult(0, 3, 3), "Between quadrant I and II"),
+        Assert.assertTrue ("Inside the zone, quadrant I", getPointResult(1, 1, 5));
+        Assert.assertFalse("Outside the zone, quadrant I", getPointResult(3, 3, 2));
+        Assert.assertTrue ("On the edge, quadrant I", getPointResult(1, 1, 3));
+        Assert.assertTrue ("Between quadrant I and II", getPointResult(0, 3, 3));
 
-                () -> Assertions.assertFalse(getPointResult(-1, 0.5, 2), "Outside the zone, quadrant II"),
-                () -> Assertions.assertTrue (getPointResult(-1, 0, 3), "Between quadrant II and III"),
+        Assert.assertFalse("Outside the zone, quadrant II", getPointResult(-1, 0.5, 2));
+        Assert.assertTrue ("Between quadrant II and III", getPointResult(-1, 0, 3));
 
-                () -> Assertions.assertTrue (getPointResult(-1, -1, 5), "Inside the zone, quadrant III"),
-                () -> Assertions.assertFalse(getPointResult(-2, -3, 2.5), "Outside the zone, quadrant III"),
-                () -> Assertions.assertTrue (getPointResult(-2, -3, 4), "On the edge, quadrant III"),
-                () -> Assertions.assertTrue (getPointResult(0, -3, 3), "Between quadrant III and IV"),
+        Assert.assertTrue ("Inside the zone, quadrant III", getPointResult(-1, -1, 5));
+        Assert.assertFalse("Outside the zone, quadrant III", getPointResult(-2, -3, 2.5));
+        Assert.assertTrue ("On the edge, quadrant III", getPointResult(-2, -3, 4));
+        Assert.assertTrue ("Between quadrant III and IV", getPointResult(0, -3, 3));
 
-                () -> Assertions.assertTrue (getPointResult(1.5, -0.5, 4), "Inside the zone, quadrant IV"),
-                () -> Assertions.assertFalse(getPointResult(2, -2, 5), "Outside the zone, quadrant IV"),
-                () -> Assertions.assertTrue (getPointResult(0.7071, -0.7071, 2), "On the edge, quadrant IV"),
-                () -> Assertions.assertTrue (getPointResult(2, 0, 4), "Between quadrant IV and I")
-        );
+        Assert.assertTrue ("Inside the zone, quadrant IV", getPointResult(1.5, -0.5, 4));
+        Assert.assertFalse("Outside the zone, quadrant IV", getPointResult(2, -2, 5));
+        Assert.assertTrue ("On the edge, quadrant IV", getPointResult(0.7071, -0.7071, 2));
+        Assert.assertTrue ("Between quadrant IV and I", getPointResult(2, 0, 4));
     }
+
 
     private boolean getPointResult(double x, double y, double r)
     {

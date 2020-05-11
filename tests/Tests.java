@@ -18,7 +18,7 @@ public class Tests {
                 () -> Assertions.assertTrue (getPointResult(0, 3, 3), "Between quadrant I and II"),
 
                 () -> Assertions.assertFalse(getPointResult(-1, 0.5, 2), "Outside the zone, quadrant II"),
-                () -> Assertions.assertTrue (getPointResult(0, 0, 3), "Between quadrant II and III"),
+                () -> Assertions.assertTrue (getPointResult(-1, 0, 3), "Between quadrant II and III"),
 
                 () -> Assertions.assertTrue (getPointResult(-1, -1, 5), "Inside the zone, quadrant III"),
                 () -> Assertions.assertFalse(getPointResult(-2, -3, 2.5), "Outside the zone, quadrant III"),
@@ -27,6 +27,7 @@ public class Tests {
 
                 () -> Assertions.assertTrue (getPointResult(1.5, -0.5, 4), "Inside the zone, quadrant IV"),
                 () -> Assertions.assertFalse(getPointResult(2, -2, 5), "Outside the zone, quadrant IV"),
+                () -> Assertions.assertTrue (getPointResult(0.7071, -0.7071, 2), "On the edge, quadrant IV"),
                 () -> Assertions.assertTrue (getPointResult(2, 0, 4), "Between quadrant IV and I")
         );
     }

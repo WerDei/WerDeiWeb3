@@ -28,7 +28,7 @@
         <h:commandButton styleClass="button logout-button"
                          style="float: right"
                          action="LeaveService"
-                         value="Leave, for now"/>
+                         value=""/>
     </h:form>
 
     <div id="main" class="mainservice">
@@ -59,7 +59,7 @@
                              converterMessage="No, enter a number! Come on, you can do it!"
                              requiredMessage="Please do this, it's important!"
                              maxlength="15"
-                             onkeyup="setTimeout(onYChange, 50)">
+                             onkeyup="setTimeout(onYChange, 200)">
                     <f:validateDoubleRange minimum="-3.0" maximum="3.0" />
                     <f:ajax event="keyup" render="form_value_y_display submit"/>
                 </h:inputText><br/>

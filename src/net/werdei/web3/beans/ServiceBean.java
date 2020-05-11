@@ -32,8 +32,6 @@ public class ServiceBean
 
     public void testPointForm()
     {
-
-
         Point p = new Point(x, y, r, 0, username);
         inside = p.getResult();
 
